@@ -1,0 +1,30 @@
+#!/usr/bin/python3
+import datetime
+import argparse
+
+parser = argparse.ArgumentParser(description="自作の時間を出力するコマンドです。")
+
+# バージョンオプションの追加 (-v, --version)
+parser.add_argument(
+  "-v",
+  "--version",
+  action="version",
+  version="now 1.0.0",  # %(prog)s にはコマンド名（hello）が自動で入ります
+  help="プログラムのバージョンを表示して終了します。"
+)
+
+# 【追加】日付のみを表示するオプション (-o)
+parser.add_argument(
+  "-o",
+  action="store_true",  # args.oを使えるようにする
+  help="日付のみ（時刻なし）を出力します。"
+)
+args = parser.parse_args()
+
+if args.o:
+  # 日付のみ表示 (YYYY-MM-DD)
+  print(datetime.date.today())
+else:
+  # 通常通り日時を表示 (YYYY-MM-DD HH:MM:SS.ffffff)
+  print(datetime.datetime.now())
+
