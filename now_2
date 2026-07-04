@@ -1,0 +1,17 @@
+#!/usr/bin/python3
+import datetime
+import argparse
+
+parser = argparse.ArgumentParser(description="自作の時間を出力するコマンドです。")
+
+# バージョンオプションの追加 (-v, --version)
+parser.add_argument(
+  "-v",
+  "--version",
+  action="version",
+  version="now 1.0.0",  # %(prog)s にはコマンド名（hello）が自動で入ります
+  help="プログラムのバージョンを表示して終了します。"
+)
+
+args = parser.parse_args()
+print(datetime.datetime.now())
