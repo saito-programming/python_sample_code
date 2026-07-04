@@ -1,0 +1,8 @@
+#!/usr/bin/python3
+import sys
+
+args = sys.argv
+if len(args) > 1:
+  print("Hello "+args[1])
+else:
+  print("引数の指定がありません")
