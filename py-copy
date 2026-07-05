@@ -1,0 +1,28 @@
+#!/usr/bin/python3
+import sys
+import os
+import getpass
+
+# 引数でクリップボードに値を保存する
+if len(sys.argv) > 1:
+    text = sys.argv[1]
+# パイプ経由でクリップボードに値を保存する
+elif not sys.stdin.isatty():
+    text = sys.stdin.read()
+else:
+    print("利用方法: py-copy [コピーしたい文字列]", file=sys.stderr)
+    sys.exit(1)
+
+# 現在のユーザー名を取得し、/tmp 内に固有のファイルパスを設定
+user = getpass.getuser()
+clip_file = f"/tmp/py_clip_{user}"
+
+# 新規作成時、または既存ファイルを開いて書き込み
+# 他のユーザーが読めない権限（600）でファイルを扱うため、os.O_CREAT と os.O_WRONLY を使用
+flags = os.O_WRONLY | os.O_CREAT | os.O_TRUNC
+mode = 0o600  # 所有者のみ読み書き可能（rw-------）
+
+with open(os.open(clip_file, flags, mode), 'w') as f:
+    f.write(text)
+
+print(f"copied to clipboard (path: {clip_file})")
