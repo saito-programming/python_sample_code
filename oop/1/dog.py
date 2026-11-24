@@ -14,5 +14,4 @@ class Dog:
 if __name__ == "__main__":
     pochi = Dog()
     print(pochi.name)
-    print(pochi.genki)
     print(pochi.bark())
