@@ -8,7 +8,11 @@ class Dog:
             name: 犬の名前。
         """
         self.name = name
-        self._genki = 3
+        self.__genki = 3
+
+    @property
+    def genki(self):
+        return self.__genki
 
     def bark(self) -> str:
         """元気度があれば吠え、なければ疲れたメッセージを返す。
@@ -19,8 +23,8 @@ class Dog:
         Returns:
             鳴き声または疲れたことを示すメッセージ。
         """
-        if self._genki > 0:
-            self._genki -= 1
+        if self.__genki > 0:
+            self.__genki -= 1
             return self.name + ":[ワン]"
         return self.name + "は疲れたようです"
 
@@ -30,7 +34,7 @@ class Dog:
         Returns:
             餌を食べたことを示すメッセージ。
         """
-        self._genki += 1
+        self.__genki += 1
         return self.name + "は餌を食べて少し元気になったみたいです"
 
 if __name__ == "__main__":
